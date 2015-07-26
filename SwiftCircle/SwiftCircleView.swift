@@ -1,0 +1,101 @@
+/*
+ *  Copyright 2015 Erik Doernenburg
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+ *  not use these files except in compliance with the License. You may obtain
+ *  a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *  License for the specific language governing permissions and limitations
+ *  under the License.
+ */
+
+
+// http://www.raywenderlich.com/74438/swift-tutorial-a-quick-start
+// http://stackoverflow.com/questions/27852616/do-swift-screensavers-work-in-mac-os-x-before-yosemite
+
+
+import ScreenSaver
+
+class SwiftCircleView : ScreenSaverView {
+    
+    var defaultsManager: DefaultsManager = DefaultsManager()
+    lazy var sheetController: ConfigureSheetController = ConfigureSheetController()
+    
+    var canvasColor: NSColor?
+    var circleColor: NSColor?
+    var frameCount = 0
+    
+    
+    override init(frame: NSRect, isPreview: Bool) {
+        super.init(frame: frame, isPreview: isPreview)
+        setAnimationTimeInterval(1.0 / 60.0)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override func hasConfigureSheet() -> Bool {
+        return true
+    }
+    
+    override func configureSheet() -> NSWindow? {
+        return sheetController.window
+    }
+
+    
+    override func startAnimation() {
+        super.startAnimation()
+        cacheColors()
+        needsDisplay = true
+    }
+    
+    override func stopAnimation() {
+        super.stopAnimation()
+    }
+    
+
+    override func drawRect(rect: NSRect) {
+        super.drawRect(rect)
+        cacheColors()
+        drawBackground()
+     }
+    
+    override func animateOneFrame() {
+        window!.disableFlushWindow()
+        drawCircle(canvasColor!, radiusPercent: CGFloat(15))
+        let r = CGFloat(sin(Float(frameCount) / 30) * 2 + 11)
+        drawCircle(circleColor!, radiusPercent: r)
+        frameCount += 1
+        window!.enableFlushWindow()
+    }
+    
+    
+    func cacheColors() {
+        canvasColor = defaultsManager.canvasColor
+        circleColor = defaultsManager.circleColor
+    }
+    
+    func drawBackground() {
+        var bPath:NSBezierPath = NSBezierPath(rect: bounds)
+        canvasColor!.set()
+        bPath.fill()
+    }
+
+    func drawCircle(color: NSColor, radiusPercent: CGFloat) {
+        let radius = bounds.size.height * radiusPercent/100
+        var circleRect = NSMakeRect(bounds.size.width/2 - radius/2, bounds.size.height/2 - radius/2, radius, radius)
+        var cPath: NSBezierPath = NSBezierPath(ovalInRect: circleRect)
+        color.set()
+        cPath.fill()
+    }
+    
+}
+    
+
