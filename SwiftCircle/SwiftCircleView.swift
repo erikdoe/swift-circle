@@ -26,6 +26,8 @@ class SwiftCircleView : ScreenSaverView {
     var defaultsManager: DefaultsManager = DefaultsManager()
     lazy var sheetController: ConfigureSheetController = ConfigureSheetController()
     
+    var circleSize: Float = 100
+    var amplitude: Float = 0.5
     var canvasColor: NSColor?
     var circleColor: NSColor?
     var frameCount = 0
@@ -69,15 +71,17 @@ class SwiftCircleView : ScreenSaverView {
     
     override func animateOneFrame() {
         window!.disableFlushWindow()
-        drawCircle(canvasColor!, radiusPercent: CGFloat(15))
-        let r = CGFloat(sin(Float(frameCount) / 30) * 2 + 11)
-        drawCircle(circleColor!, radiusPercent: r)
+        drawCircle(canvasColor!, diameter: CGFloat(circleSize+amplitude))
+        let r = CGFloat(sin(Float(frameCount) / 40) * amplitude + circleSize)
+        drawCircle(circleColor!, diameter: r)
         frameCount += 1
         window!.enableFlushWindow()
     }
     
     
     func cacheColors() {
+        circleSize = Float(bounds.size.height) / 4 * defaultsManager.size
+        amplitude = circleSize * defaultsManager.amplitude * 0.75
         canvasColor = defaultsManager.canvasColor
         circleColor = defaultsManager.circleColor
     }
@@ -88,9 +92,8 @@ class SwiftCircleView : ScreenSaverView {
         bPath.fill()
     }
 
-    func drawCircle(color: NSColor, radiusPercent: CGFloat) {
-        let radius = bounds.size.height * radiusPercent/100
-        var circleRect = NSMakeRect(bounds.size.width/2 - radius/2, bounds.size.height/2 - radius/2, radius, radius)
+    func drawCircle(color: NSColor, diameter: CGFloat) {
+        var circleRect = NSMakeRect(bounds.size.width/2 - diameter/2, bounds.size.height/2 - diameter/2, diameter, diameter)
         var cPath: NSBezierPath = NSBezierPath(ovalInRect: circleRect)
         color.set()
         cPath.fill()

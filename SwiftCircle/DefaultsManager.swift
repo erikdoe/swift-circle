@@ -26,8 +26,7 @@ class DefaultsManager {
         defaults = ScreenSaverDefaults.defaultsForModuleWithName(identifier) as NSUserDefaults
     }
 
-    var canvasColor: NSColor
-    {
+    var canvasColor: NSColor {
         set(newColor) {
             setColor(newColor, key: "CanvasColor")
         }
@@ -36,8 +35,7 @@ class DefaultsManager {
         }
     }
 
-    var circleColor: NSColor
-    {
+    var circleColor: NSColor {
         set(newColor) {
             setColor(newColor, key: "CircleColor")
         }
@@ -58,4 +56,25 @@ class DefaultsManager {
         return nil;
     }
 
+    
+    var size: Float {
+        set(newSize) {
+            defaults.setFloat(newSize, forKey: "Size")
+        }
+        get {
+            let v = defaults.floatForKey("Size")
+            return v > 0 ? v : 0.55
+        }
+    }
+    
+    var amplitude: Float {
+        set(newSize) {
+            defaults.setFloat(newSize, forKey: "Amplitude")
+        }
+        get {
+            let v = defaults.floatForKey("Amplitude")
+            return v > 0 ? v : 0.55
+        }
+    }
+    
 }

@@ -24,6 +24,8 @@ class ConfigureSheetController : NSObject {
     @IBOutlet var window: NSWindow?
     @IBOutlet var circleColorWell: NSColorWell?
     @IBOutlet var canvasColorWell: NSColorWell?
+    @IBOutlet var sizeSlider: NSSlider?
+    @IBOutlet var amplitudeSlider: NSSlider?
 
     override init() {
         super.init()
@@ -31,11 +33,15 @@ class ConfigureSheetController : NSObject {
         myBundle.loadNibNamed("ConfigureSheet", owner: self, topLevelObjects: nil)
         canvasColorWell!.color = defaultsManager.canvasColor
         circleColorWell!.color = defaultsManager.circleColor
+        sizeSlider!.floatValue = defaultsManager.size
+        amplitudeSlider!.floatValue = defaultsManager.amplitude
     }
 
     @IBAction func updateDefaults(sender: AnyObject) {
         defaultsManager.canvasColor = canvasColorWell!.color
         defaultsManager.circleColor = circleColorWell!.color
+        defaultsManager.size = sizeSlider!.floatValue
+        defaultsManager.amplitude = amplitudeSlider!.floatValue
     }
    
     @IBAction func closeConfigureSheet(sender: AnyObject) {
