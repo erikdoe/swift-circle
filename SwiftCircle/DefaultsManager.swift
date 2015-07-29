@@ -40,7 +40,7 @@ class DefaultsManager {
             setColor(newColor, key: "CircleColor")
         }
         get {
-            return getColor("CircleColor") ?? NSColor(red: 0.5, green: 0.1, blue: 0.2, alpha: 1.0)
+            return getColor("CircleColor") ?? NSColor(red: 1, green: 0.5, blue: 0.0, alpha: 1.0)
         }
     }
 

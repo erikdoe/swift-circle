@@ -11,6 +11,7 @@
 		034D85901B64F0AD00D2EF6B /* ConfigureSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D858F1B64F0AD00D2EF6B /* ConfigureSheetController.swift */; };
 		038330F71B6564C50015B15F /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038330F61B6564C50015B15F /* DefaultsManager.swift */; };
 		03A485271B644187008A2D6A /* SwiftCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A485261B644187008A2D6A /* SwiftCircleView.swift */; };
+		03F9545E1B695E0A00E47ED7 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F9545D1B695E0A00E47ED7 /* thumbnail.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		03A485181B644145008A2D6A /* SwiftCircle.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCircle.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A4851C1B644145008A2D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03A485261B644187008A2D6A /* SwiftCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCircleView.swift; sourceTree = "<group>"; };
+		03F9545D1B695E0A00E47ED7 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		03A4851B1B644145008A2D6A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				03F9545D1B695E0A00E47ED7 /* thumbnail.png */,
 				03A4851C1B644145008A2D6A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -137,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				034D858C1B64DF4D00D2EF6B /* ConfigureSheet.xib in Resources */,
+				03F9545E1B695E0A00E47ED7 /* thumbnail.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
