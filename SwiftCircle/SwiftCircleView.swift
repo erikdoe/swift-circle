@@ -35,7 +35,7 @@ class SwiftCircleView : ScreenSaverView {
     
     override init(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
-        setAnimationTimeInterval(1.0 / 60.0)
+        setAnimationTimeInterval = 1.0 / 60.0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,14 +87,14 @@ class SwiftCircleView : ScreenSaverView {
     }
     
     func drawBackground() {
-        var bPath:NSBezierPath = NSBezierPath(rect: bounds)
+        let bPath:NSBezierPath = NSBezierPath(rect: bounds)
         canvasColor!.set()
         bPath.fill()
     }
 
     func drawCircle(color: NSColor, diameter: CGFloat) {
-        var circleRect = NSMakeRect(bounds.size.width/2 - diameter/2, bounds.size.height/2 - diameter/2, diameter, diameter)
-        var cPath: NSBezierPath = NSBezierPath(ovalInRect: circleRect)
+        let circleRect = NSMakeRect(bounds.size.width/2 - diameter/2, bounds.size.height/2 - diameter/2, diameter, diameter)
+        let cPath: NSBezierPath = NSBezierPath(ovalInRect: circleRect)
         color.set()
         cPath.fill()
     }

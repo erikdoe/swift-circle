@@ -109,6 +109,8 @@
 		03A4850F1B644145008A2D6A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0730;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Mulle Kybernetik";
 				TargetAttributes = {
