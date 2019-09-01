@@ -67,15 +67,14 @@ public class SwiftCircleView : ScreenSaverView {
         super.draw(rect)
         cacheColors()
         drawBackground()
-     }
-    
-    override public func animateOneFrame() {
-        window!.disableFlushing()
         drawCircle(canvasColor!, diameter: CGFloat(circleSize+amplitude))
         let r = CGFloat(sin(Float(frameCount) / 40) * amplitude + circleSize)
         drawCircle(circleColor!, diameter: r)
         frameCount += 1
-        window!.enableFlushing()
+     }
+    
+    override public func animateOneFrame() {
+        needsDisplay = true
     }
     
     
