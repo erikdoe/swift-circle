@@ -43,11 +43,11 @@ public class SwiftCircleView : ScreenSaverView {
     }
     
     
-    override public func hasConfigureSheet() -> Bool {
+    override public var hasConfigureSheet: Bool {
         return true
     }
     
-    override public func configureSheet() -> NSWindow? {
+    override public var configureSheet: NSWindow? {
         return sheetController.window
     }
 
