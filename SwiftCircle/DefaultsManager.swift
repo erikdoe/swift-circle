@@ -19,11 +19,11 @@ import ScreenSaver
 
 class DefaultsManager {
     
-    var defaults: NSUserDefaults
+    var defaults: UserDefaults
     
     init() {
-        let identifier = NSBundle(forClass: DefaultsManager.self).bundleIdentifier
-        defaults = ScreenSaverDefaults.defaultsForModuleWithName(identifier) as NSUserDefaults
+        let identifier = Bundle(for: DefaultsManager.self).bundleIdentifier
+        defaults = ScreenSaverDefaults(forModuleWithName: identifier!) as! ScreenSaverDefaults
     }
 
     var canvasColor: NSColor {
@@ -31,7 +31,7 @@ class DefaultsManager {
             setColor(newColor, key: "CanvasColor")
         }
         get {
-            return getColor("CanvasColor") ?? NSColor.blackColor()
+            return getColor("CanvasColor") ?? NSColor.black
         }
     }
 
@@ -44,14 +44,14 @@ class DefaultsManager {
         }
     }
 
-    func setColor(color: NSColor, key: String) {
-        defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(color), forKey: key)
+    func setColor(_ color: NSColor, key: String) {
+        defaults.set(NSKeyedArchiver.archivedData(withRootObject: color), forKey: key)
         defaults.synchronize()
     }
 
-    func getColor(key: String) -> NSColor? {
-        if let canvasColorData = defaults.objectForKey(key) as? NSData {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(canvasColorData) as? NSColor
+    func getColor(_ key: String) -> NSColor? {
+        if let canvasColorData = defaults.object(forKey: key) as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: canvasColorData) as? NSColor
         }
         return nil;
     }
@@ -59,20 +59,20 @@ class DefaultsManager {
     
     var size: Float {
         set(newSize) {
-            defaults.setFloat(newSize, forKey: "Size")
+            defaults.set(newSize, forKey: "Size")
         }
         get {
-            let v = defaults.floatForKey("Size")
+            let v = defaults.float(forKey: "Size")
             return v > 0 ? v : 0.55
         }
     }
     
     var amplitude: Float {
         set(newSize) {
-            defaults.setFloat(newSize, forKey: "Amplitude")
+            defaults.set(newSize, forKey: "Amplitude")
         }
         get {
-            let v = defaults.floatForKey("Amplitude")
+            let v = defaults.float(forKey: "Amplitude")
             return v > 0 ? v : 0.55
         }
     }

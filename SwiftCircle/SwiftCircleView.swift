@@ -21,7 +21,7 @@
 
 import ScreenSaver
 
-class SwiftCircleView : ScreenSaverView {
+public class SwiftCircleView : ScreenSaverView {
     
     var defaultsManager: DefaultsManager = DefaultsManager()
     lazy var sheetController: ConfigureSheetController = ConfigureSheetController()
@@ -33,9 +33,9 @@ class SwiftCircleView : ScreenSaverView {
     var frameCount = 0
     
     
-    override init(frame: NSRect, isPreview: Bool) {
+    override init?(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
-        setAnimationTimeInterval = 1.0 / 60.0
+        animationTimeInterval = 1.0 / 60.0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,39 +43,39 @@ class SwiftCircleView : ScreenSaverView {
     }
     
     
-    override func hasConfigureSheet() -> Bool {
+    override public func hasConfigureSheet() -> Bool {
         return true
     }
     
-    override func configureSheet() -> NSWindow? {
+    override public func configureSheet() -> NSWindow? {
         return sheetController.window
     }
 
     
-    override func startAnimation() {
+    override public func startAnimation() {
         super.startAnimation()
         cacheColors()
         needsDisplay = true
     }
     
-    override func stopAnimation() {
+    override public func stopAnimation() {
         super.stopAnimation()
     }
     
 
-    override func drawRect(rect: NSRect) {
-        super.drawRect(rect)
+    override public func draw(_ rect: NSRect) {
+        super.draw(rect)
         cacheColors()
         drawBackground()
      }
     
-    override func animateOneFrame() {
-        window!.disableFlushWindow()
+    override public func animateOneFrame() {
+        window!.disableFlushing()
         drawCircle(canvasColor!, diameter: CGFloat(circleSize+amplitude))
         let r = CGFloat(sin(Float(frameCount) / 40) * amplitude + circleSize)
         drawCircle(circleColor!, diameter: r)
         frameCount += 1
-        window!.enableFlushWindow()
+        window!.enableFlushing()
     }
     
     
@@ -92,9 +92,9 @@ class SwiftCircleView : ScreenSaverView {
         bPath.fill()
     }
 
-    func drawCircle(color: NSColor, diameter: CGFloat) {
+    func drawCircle(_ color: NSColor, diameter: CGFloat) {
         let circleRect = NSMakeRect(bounds.size.width/2 - diameter/2, bounds.size.height/2 - diameter/2, diameter, diameter)
-        let cPath: NSBezierPath = NSBezierPath(ovalInRect: circleRect)
+        let cPath: NSBezierPath = NSBezierPath(ovalIn: circleRect)
         color.set()
         cPath.fill()
     }
