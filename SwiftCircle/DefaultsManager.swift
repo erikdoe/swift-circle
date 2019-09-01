@@ -23,7 +23,7 @@ class DefaultsManager {
     
     init() {
         let identifier = Bundle(for: DefaultsManager.self).bundleIdentifier
-        defaults = ScreenSaverDefaults(forModuleWithName: identifier!) as! ScreenSaverDefaults
+        defaults = ScreenSaverDefaults(forModuleWithName: identifier!)!
     }
 
     var canvasColor: NSColor {
